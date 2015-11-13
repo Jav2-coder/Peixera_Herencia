@@ -24,8 +24,10 @@ public class Peixera {
 	/**
 	 * Constructor de l'objecte Peixera
 	 * 
-	 * @param fish parametre que dona el valor List de "Peixos" a l'objecte Peix.
-	 * @param a parametre que fa referencia al App del programa.
+	 * @param fish
+	 *            parametre que dona el valor List de "Peixos" a l'objecte Peix.
+	 * @param a
+	 *            parametre que fa referencia al App del programa.
 	 */
 	public Peixera(List<Peix> fish, App a) {
 
@@ -157,40 +159,89 @@ public class Peixera {
 
 			} else {
 
-				// matar
-				if (peix1.sexePeixos(peix2)) {
+				if (peix1 instanceof Peix_Fantasma) {
 
-					peix1.setVida(false);
-					peix2.setVida(false);
+					boolean matarPeix = peix1.matoPeix(peix2);
 
-					peix1.setPosicio(1000, 1000);
-					peix2.setPosicio(1000, 1000);
+					if (matarPeix) {
 
+						peix1.setVida(false);
+						peix2.setVida(false);
+
+						peix1.setPosicio(1000, 1000);
+						peix2.setPosicio(1000, 1000);
+
+					} else if (!matarPeix && peix2 instanceof Peix_Fantasma) {
+
+						if (peix1.getRepro() && peix2.getRepro()) {
+
+							peix1.setRepro(false);
+
+							String sex = GENERE[rnd.nextInt(2)];
+
+							Peix p = pantalla.crearPeix(sex);
+
+							if (peix1.equals(sex)) {
+
+								int X = peix1.getPosX();
+								int Y = peix1.getPosY();
+								p.setPosicio(X, Y);
+
+							} else {
+
+								int X = peix2.getPosX();
+								int Y = peix2.getPosY();
+								p.setPosicio(X, Y);
+
+							}
+							Bebes.add(p);
+						}
+					}
 				} else {
 
-					// Si poden tenir sexe ..
-					if (peix1.getRepro() && peix2.getRepro()) {
+					boolean matarPeix = peix1.matoPeix(peix2);
 
-						peix1.setRepro(false);
+					if (matarPeix) {
 
-						String sex = GENERE[rnd.nextInt(2)];
+						if (peix2 instanceof Tauro) {
 
-						Peix p = pantalla.crearPeix(sex);
+							peix1.setVida(false);
+							peix2.setVida(false);
 
-						if (peix1.equals(sex)) {
-
-							int X = peix1.getPosX();
-							int Y = peix1.getPosY();
-							p.setPosicio(X, Y);
+							peix1.setPosicio(1000, 1000);
+							peix2.setPosicio(1000, 1000);
 
 						} else {
 
-							int X = peix2.getPosX();
-							int Y = peix2.getPosY();
-							p.setPosicio(X, Y);
+							peix2.setVida(false);
+
+							peix2.setPosicio(1000, 1000);
 
 						}
-						Bebes.add(p);
+					} else {
+						if (peix1.getRepro() && peix2.getRepro()) {
+
+							peix1.setRepro(false);
+
+							String sex = GENERE[rnd.nextInt(2)];
+
+							Peix p = pantalla.crearTauro(sex);
+
+							if (peix1.equals(sex)) {
+
+								int X = peix1.getPosX();
+								int Y = peix1.getPosY();
+								p.setPosicio(X, Y);
+
+							} else {
+
+								int X = peix2.getPosX();
+								int Y = peix2.getPosY();
+								p.setPosicio(X, Y);
+
+							}
+							Bebes.add(p);
+						}
 					}
 				}
 			}

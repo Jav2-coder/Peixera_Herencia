@@ -9,9 +9,15 @@ public class Peix_Fantasma extends Peix {
 	}
 
 	@Override
-	public boolean matoPeix() {
-		
-	return true;
-	
+	public boolean matoPeix(Peix p) {
+
+		if (p instanceof Peix_Fantasma) {
+
+			if (this.sexePeixos(p)) {
+				return true;
+			}
+			return false;
+		}
+		return false;
 	}
 }

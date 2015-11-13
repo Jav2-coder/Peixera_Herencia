@@ -77,7 +77,7 @@ public class App extends GraphicsProgram {
 	 * @param sexe String que dona el sexe al objecte Peix.
 	 * @return
 	 */
-	private Peix crearTauro(String sexe) {
+	public Peix crearTauro(String sexe) {
 		
 		int movX = DIRECCIO[rnd.nextInt(3)];
 		int movY = 0;

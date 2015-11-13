@@ -135,7 +135,7 @@ public abstract class Peix {
 		return false;
 	}
 
-	public abstract boolean matoPeix();
+	public abstract boolean matoPeix(Peix p);
 	
 	/**
 	 * Metode que retorna un GRectangle a partir dels limits de la GImage.
@@ -169,5 +169,10 @@ public abstract class Peix {
 	 */
 	public void setPosicio(int X, int Y) {
 		imatge.setLocation(X, Y);
+	}
+
+	public boolean matoPeix() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
