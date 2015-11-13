@@ -14,13 +14,14 @@ import acm.program.GraphicsProgram;
  */
 public class App extends GraphicsProgram {
 
-	private static final int TOTAL_PEIXOS = 50;
+	private static final int TOTAL_PEIXOS = 40;
+	private static final int TOTAL_TAURONS = 20;
 	private static final int PEIXERA_AMP = 600;
 	private static final int PEIXERA_ALT = 776;
 	private static final long serialVersionUID = 8690459163749096224L;
 	private static final int[] DIRECCIO = { 0, 1, -1 };
 	List<Peix> Peixos = new ArrayList<Peix>();
-	Random rnd;
+	Random rnd = new Random();
 
 	/**
 	 * Metode on creem variables que no variaran mentre fem servir el programa.
@@ -46,6 +47,17 @@ public class App extends GraphicsProgram {
 				Peixos.add(crearPeix("femella"));
 			}
 		}
+		
+		for (int i = 0; i < TOTAL_TAURONS; i++) {
+			
+			if (i < (TOTAL_TAURONS / 2)) {
+				Peixos.add(crearTauro("mascle"));
+
+			} else {
+				Peixos.add(crearTauro("femella"));
+			}
+			
+		}
 
 		Peixera peixera = new Peixera(Peixos, this);
 		boolean noPeixos = peixera.inici();
@@ -58,15 +70,48 @@ public class App extends GraphicsProgram {
 	}
 
 	/**
-	 * Metode que s'encarrega de crear objectes Peix, als quals els hi dona la
-	 * direcció del moviment, la GImage i un String amb el seu sexe.
+	 * Metode que s'encarrega de crear objectes Tauro, als quals
+	 * els hi dona la direcció del moviment, la GImage i un 
+	 * String amb el seu sexe.
+	 * 
+	 * @param sexe String que dona el sexe al objecte Peix.
+	 * @return
+	 */
+	private Peix crearTauro(String sexe) {
+		
+		int movX = DIRECCIO[rnd.nextInt(3)];
+		int movY = 0;
+
+		if (movX == 0) {
+			movY = DIRECCIO[rnd.nextInt(2) + 1];
+		}
+
+		GImage img;
+
+		if (sexe.equals("mascle")) {
+			img = new GImage("pacman.png");
+			img.scale(0.08);
+			add(img);
+		} else {
+			img = new GImage("ms pacman.png");
+			img.scale(0.08);
+			add(img);
+		}
+
+		Tauro T = new Tauro(img, sexe, movX, movY);
+
+		return T;
+	}
+
+	/**
+	 * Metode que s'encarrega de crear objectes Peix_Fantasma, als 
+	 * quals els hi dona la direcció del moviment, la GImage i un 
+	 * String amb el seu sexe.
 	 * 
 	 * @param sexe String que dona el sexe al objecte Peix.
 	 * @return
 	 */
 	public Peix crearPeix(String sexe) {
-
-		rnd = new Random();
 
 		int movX = DIRECCIO[rnd.nextInt(3)];
 		int movY = 0;
@@ -79,15 +124,15 @@ public class App extends GraphicsProgram {
 
 		if (sexe.equals("mascle")) {
 			img = new GImage("inky.png");
-			img.scale(0.1);
+			img.scale(0.08);
 			add(img);
 		} else {
 			img = new GImage("pinky.png");
-			img.scale(0.1);
+			img.scale(0.08);
 			add(img);
 		}
 
-		Peix P = new Peix(img, sexe, movX, movY);
+		Peix_Fantasma P = new Peix_Fantasma(img, sexe, movX, movY);
 
 		return P;
 	}

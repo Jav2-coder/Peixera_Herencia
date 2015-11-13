@@ -8,7 +8,7 @@ import acm.graphics.GRectangle;
  * @author Surrui
  *
  */
-public class Peix {
+public abstract class Peix {
 
 	String sexe;
 	int movX;
@@ -135,6 +135,8 @@ public class Peix {
 		return false;
 	}
 
+	public abstract boolean matoPeix();
+	
 	/**
 	 * Metode que retorna un GRectangle a partir dels limits de la GImage.
 	 * 

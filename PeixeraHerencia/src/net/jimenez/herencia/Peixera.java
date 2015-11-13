@@ -60,7 +60,7 @@ public class Peixera {
 
 		rnd = new Random();
 
-		for (int i = 0; i < Peixos.size(); i++) {
+		for (int i = Peixos.size() - 1; i >= 0; i--) {
 
 			boolean semafor = true;
 
