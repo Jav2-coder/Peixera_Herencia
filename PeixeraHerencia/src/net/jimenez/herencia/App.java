@@ -14,8 +14,8 @@ import acm.program.GraphicsProgram;
  */
 public class App extends GraphicsProgram {
 
-	private static final int TOTAL_PEIXOS = 40;
-	private static final int TOTAL_TAURONS = 20;
+	private static final int TOTAL_PEIXOS = 50;
+	private static final int TOTAL_TAURONS = 10;
 	private static final int PEIXERA_AMP = 600;
 	private static final int PEIXERA_ALT = 776;
 	private static final long serialVersionUID = 8690459163749096224L;
@@ -74,7 +74,7 @@ public class App extends GraphicsProgram {
 	 * els hi dona la direcció del moviment, la GImage i un 
 	 * String amb el seu sexe.
 	 * 
-	 * @param sexe String que dona el sexe al objecte Peix.
+	 * @param sexe String que dona el sexe al objecte Tauro.
 	 * @return
 	 */
 	public Peix crearTauro(String sexe) {
@@ -108,7 +108,7 @@ public class App extends GraphicsProgram {
 	 * quals els hi dona la direcció del moviment, la GImage i un 
 	 * String amb el seu sexe.
 	 * 
-	 * @param sexe String que dona el sexe al objecte Peix.
+	 * @param sexe String que dona el sexe al objecte Peix_Fantasma.
 	 * @return
 	 */
 	public Peix crearPeix(String sexe) {

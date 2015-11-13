@@ -135,6 +135,13 @@ public abstract class Peix {
 		return false;
 	}
 
+	/**
+	 * Metode abstracte que controlara si els objectes s'eliminen o no.
+	 * 
+	 * @param p Objecte peix que utilitzarem per saber si s'ha d'eliminar
+	 * o no al fer la colisio.
+	 * @return
+	 */
 	public abstract boolean matoPeix(Peix p);
 	
 	/**

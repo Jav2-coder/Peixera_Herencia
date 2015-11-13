@@ -24,10 +24,8 @@ public class Peixera {
 	/**
 	 * Constructor de l'objecte Peixera
 	 * 
-	 * @param fish
-	 *            parametre que dona el valor List de "Peixos" a l'objecte Peix.
-	 * @param a
-	 *            parametre que fa referencia al App del programa.
+	 * @param fish parametre que dona el valor List de "Peixos" a l'objecte Peix.
+	 * @param a parametre que fa referencia al App del programa.
 	 */
 	public Peixera(List<Peix> fish, App a) {
 
@@ -142,7 +140,7 @@ public class Peixera {
 	/**
 	 * Metode que s'encarrega de produir el resultat de la colisio dels objectes
 	 * Peix i decideix si elminiar els objectes o crear un nou objecte Peix
-	 * depenent del seu valor del String sexe.
+	 * depenent del seu valor del String sexe i del seu tipus objecte.
 	 */
 	private void colisioPeixos() {
 
@@ -218,7 +216,9 @@ public class Peixera {
 							peix2.setPosicio(1000, 1000);
 
 						}
+						
 					} else {
+						
 						if (peix1.getRepro() && peix2.getRepro()) {
 
 							peix1.setRepro(false);
