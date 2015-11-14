@@ -178,8 +178,24 @@ public abstract class Peix {
 		imatge.setLocation(X, Y);
 	}
 
-	public boolean matoPeix() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	/**
+	 * Mètode per girar la imatge quan aquesta surt de la pantalla.
+	 */
+	public void flipHorizontal() {
+        int[][] array = imatge.getPixelArray();
+        int height = array.length;
+        int width = array[0].length;
+
+        for (int y = 0; y < height; y++) {
+            for (int x1 = 0; x1 < width / 2; x1++) {
+                int x2 = width - x1 - 1;
+                int temp = array[y][x1];
+                array[y][x1] = array[y][x2];
+                array[y][x2] = temp;
+            }
+        }
+        imatge.setImage(new GImage(array).getImage());
+        imatge.scale(0.08);
+    }
+	
 }

@@ -14,8 +14,8 @@ import acm.program.GraphicsProgram;
  */
 public class App extends GraphicsProgram {
 
-	private static final int TOTAL_PEIXOS = 50;
-	private static final int TOTAL_TAURONS = 10;
+	private static final int TOTAL_PEIXOS = 54;
+	private static final int TOTAL_TAURONS = 6;
 	private static final int PEIXERA_AMP = 600;
 	private static final int PEIXERA_ALT = 776;
 	private static final long serialVersionUID = 8690459163749096224L;

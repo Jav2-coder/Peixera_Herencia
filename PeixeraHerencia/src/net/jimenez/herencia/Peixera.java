@@ -131,6 +131,7 @@ public class Peixera {
 			} else {
 
 				Peixos.get(i).canviDireccio();
+				Peixos.get(i).flipHorizontal();
 				Peixos.get(i).movimentPeix();
 
 			}
