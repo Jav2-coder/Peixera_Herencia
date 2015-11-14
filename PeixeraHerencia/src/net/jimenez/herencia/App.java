@@ -47,16 +47,16 @@ public class App extends GraphicsProgram {
 				Peixos.add(crearPeix("femella"));
 			}
 		}
-		
+
 		for (int i = 0; i < TOTAL_TAURONS; i++) {
-			
+
 			if (i < (TOTAL_TAURONS / 2)) {
 				Peixos.add(crearTauro("mascle"));
 
 			} else {
 				Peixos.add(crearTauro("femella"));
 			}
-			
+
 		}
 
 		Peixera peixera = new Peixera(Peixos, this);
@@ -70,15 +70,15 @@ public class App extends GraphicsProgram {
 	}
 
 	/**
-	 * Metode que s'encarrega de crear objectes Tauro, als quals
-	 * els hi dona la direcció del moviment, la GImage i un 
-	 * String amb el seu sexe.
+	 * Metode que s'encarrega de crear objectes Tauro, als quals els hi dona la
+	 * direcció del moviment, la GImage i un String amb el seu sexe.
 	 * 
-	 * @param sexe String que dona el sexe al objecte Tauro.
+	 * @param sexe
+	 *            String que dona el sexe al objecte Tauro.
 	 * @return
 	 */
 	public Peix crearTauro(String sexe) {
-		
+
 		int movX = DIRECCIO[rnd.nextInt(3)];
 		int movY = 0;
 
@@ -90,25 +90,27 @@ public class App extends GraphicsProgram {
 
 		if (sexe.equals("mascle")) {
 			img = new GImage("pacman.png");
-			img.scale(0.08);
 			add(img);
 		} else {
 			img = new GImage("ms pacman.png");
-			img.scale(0.08);
 			add(img);
 		}
 
 		Tauro T = new Tauro(img, sexe, movX, movY);
 
+		if (movX < 0) {
+			T.flipHorizontal();
+		}
+		
 		return T;
 	}
 
 	/**
-	 * Metode que s'encarrega de crear objectes Peix_Fantasma, als 
-	 * quals els hi dona la direcció del moviment, la GImage i un 
-	 * String amb el seu sexe.
+	 * Metode que s'encarrega de crear objectes Peix_Fantasma, als quals els hi
+	 * dona la direcció del moviment, la GImage i un String amb el seu sexe.
 	 * 
-	 * @param sexe String que dona el sexe al objecte Peix_Fantasma.
+	 * @param sexe
+	 *            String que dona el sexe al objecte Peix_Fantasma.
 	 * @return
 	 */
 	public Peix crearPeix(String sexe) {
@@ -124,15 +126,17 @@ public class App extends GraphicsProgram {
 
 		if (sexe.equals("mascle")) {
 			img = new GImage("inky.png");
-			img.scale(0.08);
 			add(img);
 		} else {
 			img = new GImage("pinky.png");
-			img.scale(0.08);
 			add(img);
 		}
 
 		Peix_Fantasma P = new Peix_Fantasma(img, sexe, movX, movY);
+
+		if (movX < 0) {
+			P.flipHorizontal();
+		}
 
 		return P;
 	}

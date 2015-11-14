@@ -195,7 +195,6 @@ public abstract class Peix {
             }
         }
         imatge.setImage(new GImage(array).getImage());
-        imatge.scale(0.08);
     }
 	
 }
