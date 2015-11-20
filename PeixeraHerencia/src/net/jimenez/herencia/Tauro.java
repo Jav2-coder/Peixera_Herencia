@@ -2,7 +2,7 @@ package net.jimenez.herencia;
 
 import acm.graphics.GImage;
 
-public class Tauro extends Peix {
+public class Tauro extends Animal {
 
 	/**
 	 * Constructor de l'objecte Tauro que hereta del 
@@ -26,9 +26,9 @@ public class Tauro extends Peix {
 	 * @return
 	 */
 	@Override
-	public boolean matoPeix(Peix p) {
+	public boolean matoAnimal(Animal a) {
 		
-		if (p instanceof Peix_Fantasma || this.sexePeixos(p)) {
+		if (a instanceof Peix || this.sexeAnimals(a)) {
 			return true;
 		}
 		return false;

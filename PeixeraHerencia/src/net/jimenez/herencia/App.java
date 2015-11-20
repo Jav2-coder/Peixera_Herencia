@@ -20,7 +20,7 @@ public class App extends GraphicsProgram {
 	private static final int PEIXERA_AMP = 600;
 	private static final int PEIXERA_ALT = 776;
 	private static final int[] DIRECCIO = { 0, 1, -1 };
-	List<Peix> Peixos = new ArrayList<Peix>();
+	List<Animal> Animals = new ArrayList<Animal>();
 	Random rnd = new Random();
 
 	/**
@@ -41,28 +41,28 @@ public class App extends GraphicsProgram {
 		for (int i = 0; i < TOTAL_PEIXOS; i++) {
 
 			if (i < (TOTAL_PEIXOS / 2)) {
-				Peixos.add(crearPeix("mascle"));
+				Animals.add(crearPeix("mascle"));
 
 			} else {
-				Peixos.add(crearPeix("femella"));
+				Animals.add(crearPeix("femella"));
 			}
 		}
 
 		for (int i = 0; i < TOTAL_TAURONS; i++) {
 
 			if (i < (TOTAL_TAURONS / 2)) {
-				Peixos.add(crearTauro("mascle"));
+				Animals.add(crearTauro("mascle"));
 
 			} else {
-				Peixos.add(crearTauro("femella"));
+				Animals.add(crearTauro("femella"));
 			}
 
 		}
 
-		Peixera peixera = new Peixera(Peixos, this);
-		boolean noPeixos = peixera.inici();
+		Peixera peixera = new Peixera(Animals, this);
+		boolean noAnimals = peixera.inici();
 
-		if (noPeixos) {
+		if (noAnimals) {
 			GImage fi = new GImage("fi.png");
 			fi.setLocation(0, (getHeight() / 2) - (fi.getHeight() / 2));
 			add(fi);
@@ -77,7 +77,7 @@ public class App extends GraphicsProgram {
 	 *            String que dona el sexe al objecte Tauro.
 	 * @return
 	 */
-	public Peix crearTauro(String sexe) {
+	public Animal crearTauro(String sexe) {
 
 		int movX = DIRECCIO[rnd.nextInt(3)];
 		int movY = 0;
@@ -132,7 +132,7 @@ public class App extends GraphicsProgram {
 			add(img);
 		}
 
-		Peix_Fantasma P = new Peix_Fantasma(img, sexe, movX, movY);
+		Peix P = new Peix(img, sexe, movX, movY);
 
 		if (movX < 0) {
 			P.flipHorizontal();

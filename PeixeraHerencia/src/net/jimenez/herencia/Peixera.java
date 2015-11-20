@@ -15,8 +15,8 @@ public class Peixera {
 
 	private static final String[] GENERE = { "mascle", "femella" };
 
-	List<Peix> Peixos;
-	List<Peix> Bebes = new ArrayList<Peix>();
+	List<Animal> Animals;
+	List<Animal> Bebes = new ArrayList<Animal>();
 	App pantalla;
 	Random rnd;
 	GRectangle peixera;
@@ -27,9 +27,9 @@ public class Peixera {
 	 * @param fish parametre que dona el valor List de "Peixos" a l'objecte Peix.
 	 * @param a parametre que fa referencia al App del programa.
 	 */
-	public Peixera(List<Peix> fish, App a) {
+	public Peixera(List<Animal> anim, App a) {
 
-		Peixos = fish;
+		Animals = anim;
 		pantalla = a;
 	}
 
@@ -44,10 +44,10 @@ public class Peixera {
 
 		posicionament();
 
-		while (Peixos.size() > 0) {
-			mourePeixos();
+		while (Animals.size() > 0) {
+			moureAnimals();
 			pantalla.pause(5);
-			colisioPeixos();
+			colisioAnimals();
 		}
 
 		return true;
@@ -60,7 +60,7 @@ public class Peixera {
 
 		rnd = new Random();
 
-		for (int i = Peixos.size() - 1; i >= 0; i--) {
+		for (int i = Animals.size() - 1; i >= 0; i--) {
 
 			boolean semafor = true;
 
@@ -72,36 +72,36 @@ public class Peixera {
 
 				if (posicio == 0) {
 
-					int altImg = Peixos.get(i).heightImg();
+					int altImg = Animals.get(i).heightImg();
 
-					Peixos.get(i).setPosicio(0, rnd.nextInt(pantalla.getHeight() - altImg));
+					Animals.get(i).setPosicio(0, rnd.nextInt(pantalla.getHeight() - altImg));
 
 				} else if (posicio == 1) {
 
-					int ampImg = Peixos.get(i).widthImg();
+					int ampImg = Animals.get(i).widthImg();
 
-					Peixos.get(i).setPosicio(rnd.nextInt(pantalla.getWidth() - ampImg), 0);
+					Animals.get(i).setPosicio(rnd.nextInt(pantalla.getWidth() - ampImg), 0);
 
 				} else if (posicio == 2) {
 
-					int altImg = Peixos.get(i).heightImg();
-					int ampImg = Peixos.get(i).widthImg();
+					int altImg = Animals.get(i).heightImg();
+					int ampImg = Animals.get(i).widthImg();
 
-					Peixos.get(i).setPosicio(pantalla.getWidth() - ampImg, rnd.nextInt(pantalla.getHeight() - altImg));
+					Animals.get(i).setPosicio(pantalla.getWidth() - ampImg, rnd.nextInt(pantalla.getHeight() - altImg));
 
 				} else {
 
-					int altImg = Peixos.get(i).heightImg();
-					int ampImg = Peixos.get(i).widthImg();
+					int altImg = Animals.get(i).heightImg();
+					int ampImg = Animals.get(i).widthImg();
 
-					Peixos.get(i).setPosicio(rnd.nextInt(pantalla.getWidth() - ampImg), pantalla.getHeight() - altImg);
+					Animals.get(i).setPosicio(rnd.nextInt(pantalla.getWidth() - ampImg), pantalla.getHeight() - altImg);
 
 				}
-				GRectangle peix1 = Peixos.get(i).getRectangle();
+				GRectangle peix1 = Animals.get(i).getRectangle();
 
-				for (int j = 0; j < Peixos.size(); j++) {
+				for (int j = 0; j < Animals.size(); j++) {
 
-					GRectangle peix2 = Peixos.get(j).getRectangle();
+					GRectangle peix2 = Animals.get(j).getRectangle();
 
 					if (i != j && peix1.intersects(peix2)) {
 						interseccio++;
@@ -118,21 +118,21 @@ public class Peixera {
 	/**
 	 * Metode que s'encarrega del moviment dels objectes Peix
 	 */
-	private void mourePeixos() {
+	private void moureAnimals() {
 
-		for (int i = 0; i < Peixos.size(); i++) {
+		for (int i = 0; i < Animals.size(); i++) {
 
-			GRectangle peix = Peixos.get(i).getRectangle();
+			GRectangle peix = Animals.get(i).getRectangle();
 
-			if (peix.intersects(peixera) && Peixos.get(i).getVida()) {
+			if (peix.intersects(peixera) && Animals.get(i).getVida()) {
 
-				Peixos.get(i).movimentPeix();
+				Animals.get(i).movimentAnimal();
 
 			} else {
 
-				Peixos.get(i).canviDireccio();
-				Peixos.get(i).flipHorizontal();
-				Peixos.get(i).movimentPeix();
+				Animals.get(i).canviDireccio();
+				Animals.get(i).flipHorizontal();
+				Animals.get(i).movimentAnimal();
 
 			}
 		}
@@ -143,105 +143,105 @@ public class Peixera {
 	 * Peix i decideix si elminiar els objectes o crear un nou objecte Peix
 	 * depenent del seu valor del String sexe i del seu tipus objecte.
 	 */
-	private void colisioPeixos() {
+	private void colisioAnimals() {
 
-		for (int i = 0; i < Peixos.size(); i++) {
+		for (int i = 0; i < Animals.size(); i++) {
 
-			Peix peix1 = Peixos.get(i);
+			Animal animal1 = Animals.get(i);
 
-			Peix peix2 = XocaAmbPeix(peix1);
+			Animal animal2 = XocaAmbAnimal(animal1);
 
-			if (peix2 == null) {
+			if (animal2 == null) {
 
 				// ja pot tornar a tenir sexe
-				Peixos.get(i).setRepro(true);
+				Animals.get(i).setRepro(true);
 
 			} else {
 
-				if (peix1 instanceof Peix_Fantasma) {
+				if (animal1 instanceof Peix) {
 
-					boolean matarPeix = peix1.matoPeix(peix2);
+					boolean matarAnimal = animal1.matoAnimal(animal2);
 
-					if (matarPeix) {
+					if (matarAnimal) {
 
-						peix1.setVida(false);
-						peix2.setVida(false);
+						animal1.setVida(false);
+						animal2.setVida(false);
 
-						peix1.setPosicio(1000, 1000);
-						peix2.setPosicio(1000, 1000);
+						animal1.setPosicio(1000, 1000);
+						animal2.setPosicio(1000, 1000);
 
-					} else if (!matarPeix && peix2 instanceof Peix_Fantasma) {
+					} else if (!matarAnimal && animal2 instanceof Peix) {
 
-						if (peix1.getRepro() && peix2.getRepro()) {
+						if (animal1.getRepro() && animal2.getRepro()) {
 
-							peix1.setRepro(false);
+							animal1.setRepro(false);
 
 							String sex = GENERE[rnd.nextInt(2)];
 
-							Peix p = pantalla.crearPeix(sex);
+							Animal a = pantalla.crearPeix(sex);
 
-							if (peix1.equals(sex)) {
+							if (animal1.equals(sex)) {
 
-								int X = peix1.getPosX();
-								int Y = peix1.getPosY();
-								p.setPosicio(X, Y);
+								int X = animal1.getPosX();
+								int Y = animal1.getPosY();
+								a.setPosicio(X, Y);
 
 							} else {
 
-								int X = peix2.getPosX();
-								int Y = peix2.getPosY();
-								p.setPosicio(X, Y);
+								int X = animal2.getPosX();
+								int Y = animal2.getPosY();
+								a.setPosicio(X, Y);
 
 							}
-							Bebes.add(p);
+							Bebes.add(a);
 						}
 					}
 				} else {
 
-					boolean matarPeix = peix1.matoPeix(peix2);
+					boolean matarAnimal = animal1.matoAnimal(animal2);
 
-					if (matarPeix) {
+					if (matarAnimal) {
 
-						if (peix2 instanceof Tauro) {
+						if (animal2 instanceof Tauro) {
 
-							peix1.setVida(false);
-							peix2.setVida(false);
+							animal1.setVida(false);
+							animal2.setVida(false);
 
-							peix1.setPosicio(1000, 1000);
-							peix2.setPosicio(1000, 1000);
+							animal1.setPosicio(1000, 1000);
+							animal2.setPosicio(1000, 1000);
 
 						} else {
 
-							peix2.setVida(false);
+							animal2.setVida(false);
 
-							peix2.setPosicio(1000, 1000);
+							animal2.setPosicio(1000, 1000);
 
 						}
 						
 					} else {
 						
-						if (peix1.getRepro() && peix2.getRepro()) {
+						if (animal1.getRepro() && animal2.getRepro()) {
 
-							peix1.setRepro(false);
+							animal1.setRepro(false);
 
 							String sex = GENERE[rnd.nextInt(2)];
 
-							Peix p = pantalla.crearTauro(sex);
+							Animal a = pantalla.crearTauro(sex);
 
-							if (peix1.equals(sex)) {
+							if (animal1.equals(sex)) {
 
-								int X = peix1.getPosX();
-								int Y = peix1.getPosY();
-								p.setPosicio(X, Y);
+								int X = animal1.getPosX();
+								int Y = animal1.getPosY();
+								a.setPosicio(X, Y);
 
 							} else {
 
-								int X = peix2.getPosX();
-								int Y = peix2.getPosY();
-								p.setPosicio(X, Y);
+								int X = animal2.getPosX();
+								int Y = animal2.getPosY();
+								a.setPosicio(X, Y);
 
 							}
-							Bebes.add(p);
+							Bebes.add(a);
 						}
 					}
 				}
@@ -251,13 +251,13 @@ public class Peixera {
 
 		for (int i = Bebes.size() - 1; i >= 0; i--) {
 
-			Peix peix1 = Bebes.get(i);
+			Animal animal1 = Bebes.get(i);
 
-			Peix peix2 = XocaAmbPeix(peix1);
+			Animal animal2 = XocaAmbAnimal(animal1);
 
-			if (peix2 == null) {
+			if (animal2 == null) {
 
-				Peixos.add(peix1);
+				Animals.add(animal1);
 				Bebes.remove(i);
 
 			}
@@ -269,21 +269,21 @@ public class Peixera {
 	 * un objecte Peix o un null per saber amb quin ha tingut la colisio
 	 * l'objecte que pasem per parametre
 	 * 
-	 * @param peix1
+	 * @param animal1
 	 * @return
 	 */
-	private Peix XocaAmbPeix(Peix peix1) {
+	private Animal XocaAmbAnimal(Animal animal1) {
 
-		GRectangle peix1rect = peix1.getRectangle();
+		GRectangle animal1rect = animal1.getRectangle();
 
-		for (Peix peix2 : Peixos) {
+		for (Animal animal2 : Animals) {
 
-			if (peix2 != peix1) {
+			if (animal2 != animal1) {
 
-				GRectangle peix2rect = peix2.getRectangle();
+				GRectangle animal2rect = animal2.getRectangle();
 
-				if (peix1rect.intersects(peix2rect)) {
-					return peix2;
+				if (animal1rect.intersects(animal2rect)) {
+					return animal2;
 				}
 			}
 		}
@@ -295,11 +295,11 @@ public class Peixera {
 	 */
 	private void netejarPeixera() {
 
-		for (int i = Peixos.size() - 1; i >= 0; i--) {
+		for (int i = Animals.size() - 1; i >= 0; i--) {
 
-			if (!Peixos.get(i).getVida()) {
+			if (!Animals.get(i).getVida()) {
 
-				Peixos.remove(i);
+				Animals.remove(i);
 
 			}
 		}
